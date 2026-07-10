@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather map</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./src/index.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather map</h1>
+        
+        <!-- Поле ввода города -->
+        <div class="input-group">
+            <label>City name</label>
+            <input type="text" id="cityName" placeholder="London">
+        </div>
+        
+        <!-- Поле ID города -->
+        <div class="input-group">
+            <label>City ID</label>
+            <input type="text" id="cityId" placeholder=" Exsample 703448" readonly>
+        </div>
+        
+        <!-- Выбор способа поиска -->
+        <div class="search-options">
+            <label>
+                <input type="radio" name="searchType" value="name"> City name
+            </label>
+            <label>
+                <input type="radio" name="searchType" value="id" checked> City ID
+            </label>
+        </div>
+        
+        <!-- Результаты погоды -->
+        <div class="weather-info">
+            <div class="weather-item">
+                <h3>Temperature</h3>
+                <p id="temperature">---</p>
+            </div>
+            <div class="weather-item">
+                <h3>Wind speed</h3>
+                <p id="windSpeed">---</p>
+            </div>
+            <div class="weather-item">
+                <h3>Humidity</h3>
+                <p id="humidity">---</p>
+            </div>
+        </div>
+        
+        <!-- Кнопки -->
+        <div class="buttons">
+            <button id="weatherBtn">Weather</button>
+            <button id="cancelBtn">Cancel</button>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
