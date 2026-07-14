@@ -68,7 +68,7 @@ function checkInputFields() {setInterval(() => {
     } else {
         wBtn.disabled = true;
     }
-}, 1000)}
+}, 100)}
 
 checkInputFields();
 
