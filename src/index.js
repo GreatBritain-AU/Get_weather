@@ -30,6 +30,8 @@ function controlRadioBtns(){
     }
 }
 
+controlRadioBtns();
+
 selectedRadioName.addEventListener('click', controlRadioBtns);
 selectedRadioId.addEventListener('click', controlRadioBtns);
 
@@ -60,6 +62,16 @@ function getWeatherData(urlAddress){
         })
 };
 
+function checkInputFields() {setInterval(() => {
+    if(cityName.value.trim() !== '' || cityId.value.trim() !== ''){
+        wBtn.disabled = false;
+    } else {
+        wBtn.disabled = true;
+    }
+}, 1000)}
+
+checkInputFields();
+
 wBtn.addEventListener('click', () => {
     if(selectedRadioName.checked){
         params.cityName = cityName.value.trim();
@@ -76,4 +88,6 @@ canBtn.addEventListener('click', () => {
     tempr.textContent = '---';
     windS.textContent = '---';
     humid.textContent = '---';
+    cityName.value = '';
+    cityId.value = '';
 });
