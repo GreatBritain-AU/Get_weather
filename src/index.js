@@ -44,7 +44,9 @@ if(selectedRadioId.checked){
 
 function getWeatherData(urlAddress){
     fetch(urlAddress)
-        .then(response => response.json())
+        .then(response => {
+            if(!response.ok) throw new Error('Response error')
+            return response.json()})
         .then(data => {
             tempr.textContent = `Temperature: ${data.main.temp} °C`;
             windS.textContent = `Wind Speed: ${data.wind.speed} m/s`;
