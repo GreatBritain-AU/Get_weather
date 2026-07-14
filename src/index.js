@@ -50,9 +50,9 @@ function getWeatherData(urlAddress){
             if(!response.ok) throw new Error('Response error')
             return response.json()})
         .then(data => {
-            tempr.textContent = `Temperature: ${data.main.temp} °C`;
-            windS.textContent = `Wind Speed: ${data.wind.speed} m/s`;
-            humid.textContent = `Humidity: ${data.main.humidity} %`;
+            tempr.textContent = `${data.main.temp} °C`;
+            windS.textContent = `${data.wind.speed} m/s`;
+            humid.textContent = `${data.main.humidity} %`;
         })
         .catch(error => {
             tempr.textContent = 'Error fetching data';
@@ -75,11 +75,9 @@ checkInputFields();
 wBtn.addEventListener('click', () => {
     if(selectedRadioName.checked){
         params.cityName = cityName.value.trim();
-        urlAddress = `${params.url}weather?q=${params.cityName}&appid=${params.appid}&units=metric`;
     }
     if(selectedRadioId.checked){
         params.cityId = cityId.value.trim();
-        urlAddress = `${params.url}weather?id=${params.cityId}&appid=${params.appid}&units=metric`;
     }
     getWeatherData(urlAddress);
 });
