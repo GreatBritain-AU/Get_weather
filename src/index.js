@@ -10,3 +10,68 @@ const humid = document.querySelector('#humidity');
 const wBtn = document.querySelector('#weatherBtn');
 const canBtn = document.querySelector('#cancelBtn');
 
+const params = {
+    url: 'https://api.openweathermap.org/data/2.5/',
+    appid: '0e6d1d3bff8e0a32e113767624f5060e',
+    cityName: cityName.value.trim(),
+    cityId: cityId.value.trim(),
+};
+
+function controlRadioBtns(){
+    if(selectedRadioName.checked){
+        cityName.disabled = false;
+        cityId.disabled = true;
+        cityId.value = '';
+    }
+    if(selectedRadioId.checked){
+        cityId.disabled = false;
+        cityName.disabled = true;
+        cityName.value = '';
+    }
+}
+
+selectedRadioName.addEventListener('click', controlRadioBtns);
+selectedRadioId.addEventListener('click', controlRadioBtns);
+
+let urlAddress;
+
+if(selectedRadioName.checked){
+    urlAddress = `${params.url}weather?q=${params.cityName}&appid=${params.appid}&units=metric`;
+}
+if(selectedRadioId.checked){
+    urlAddress = `${params.url}weather?id=${params.cityId}&appid=${params.appid}&units=metric`;
+}
+
+function getWeatherData(urlAddress){
+    fetch(urlAddress)
+        .then(response => response.json())
+        .then(data => {
+            tempr.textContent = `Temperature: ${data.main.temp} °C`;
+            windS.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+            humid.textContent = `Humidity: ${data.main.humidity} %`;
+        })
+        .catch(error => {
+            tempr.textContent = 'Error fetching data';
+            windS.textContent = 'Error fetching data';
+            humid.textContent = 'Error fetching data';
+            console.error('Error:', error);
+        })
+};
+
+wBtn.addEventListener('click', () => {
+    if(selectedRadioName.checked){
+        params.cityName = cityName.value.trim();
+        urlAddress = `${params.url}weather?q=${params.cityName}&appid=${params.appid}&units=metric`;
+    }
+    if(selectedRadioId.checked){
+        params.cityId = cityId.value.trim();
+        urlAddress = `${params.url}weather?id=${params.cityId}&appid=${params.appid}&units=metric`;
+    }
+    getWeatherData(urlAddress);
+});
+
+canBtn.addEventListener('click', () => {
+    tempr.textContent = '---';
+    windS.textContent = '---';
+    humid.textContent = '---';
+});
