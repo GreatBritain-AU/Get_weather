@@ -37,13 +37,6 @@ selectedRadioId.addEventListener('click', controlRadioBtns);
 
 let urlAddress;
 
-if(selectedRadioName.checked){
-    urlAddress = `${params.url}weather?q=${params.cityName}&appid=${params.appid}&units=metric`;
-}
-if(selectedRadioId.checked){
-    urlAddress = `${params.url}weather?id=${params.cityId}&appid=${params.appid}&units=metric`;
-}
-
 function getWeatherData(urlAddress){
     fetch(urlAddress)
         .then(response => {
@@ -75,9 +68,11 @@ checkInputFields();
 wBtn.addEventListener('click', () => {
     if(selectedRadioName.checked){
         params.cityName = cityName.value.trim();
+        urlAddress = `${params.url}weather?q=${params.cityName}&appid=${params.appid}&units=metric`;
     }
     if(selectedRadioId.checked){
         params.cityId = cityId.value.trim();
+        urlAddress = `${params.url}weather?id=${params.cityId}&appid=${params.appid}&units=metric`;
     }
     getWeatherData(urlAddress);
 });
